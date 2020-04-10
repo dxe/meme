@@ -10,6 +10,9 @@ gem "middleman-livereload", "~> 3.1.0"
 # compile and serve web assets
 gem "middleman-sprockets"
 
+# automatically vendor-prefix stylesheets
+gem "middleman-autoprefixer"
+
 # For faster file watcher updates on Windows:
 gem "wdm", "~> 0.1.0", :platforms => [:mswin, :mingw]
 
