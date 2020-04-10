@@ -4,9 +4,9 @@ activate :livereload
 ###
 # Compass
 ###
-compass_config do |config|
-  config.output_style = :compressed
-end
+#compass_config do |config|
+#  config.output_style = :compressed
+#end
 
 ###
 # Helpers
