@@ -41,6 +41,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
 
     // Reset canvas display:
     this.canvas.width = d.width;
+    console.log(this.canvas.width);
     this.canvas.height = d.height;
     ctx.clearRect(0, 0, d.width, d.height);
 
@@ -93,7 +94,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
       if (d.textAlign == 'center') {
         ctx.textAlign = 'center';
         x = d.width / 2;
-        y = d.height - d.height / 1.25;
+        y = d.height - d.height / d.topPadding;
         maxWidth = d.width / 1.2;
 
       } else if (d.textAlign == 'right' ) {
@@ -104,24 +105,14 @@ MEME.MemeCanvasView = Backbone.View.extend({
         ctx.textAlign = 'left';
       }
 
-      var words = d.headlineText.split(' ');
-      var line  = '';
+      // just split text by lines to give the user more control
+      var lines = d.headlineText.split('\n');
 
-      for (var n = 0; n < words.length; n++) {
-        var testLine  = line + words[n] + ' ';
-        var metrics   = ctx.measureText( testLine );
-        var testWidth = metrics.width;
-
-        if (testWidth > maxWidth && n > 0) {
-          ctx.fillText(line, x, y);
-          line = words[n] + ' ';
-          y += Math.round(d.fontSize * 1.25);
-        } else {
-          line = testLine;
-        }
+      for (var n = 0; n < lines.length; n++) {
+        ctx.fillText(lines[n], x, y);
+        y += Math.round(d.fontSize * 1.2);
       }
 
-      ctx.fillText(line, x, y);
       ctx.shadowColor = 'transparent';
     }
 

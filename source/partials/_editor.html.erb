@@ -1,27 +1,18 @@
 <form class="m-editor" id="meme-editor-view">
+
+  <h2><label for="width">Image size</label></h2>
+  <select class="width" id="width">
+    <option value="" disabled>Select an image size</option>
+  </select>
   
   <h2><label for="headline">Text</label></h2>
   <textarea id="headline" name="headline" type="text" value=""></textarea>
-  
-  <h2><label for="text-align">Text alignment</label></h2>
-  <select class="text-align" id="text-align">
-    <option value="" disabled>Select alignment</option>
-  </select>
 
-  <h2><label for="font-size">Text size</label></h2>
-  <select class="font-size" id="font-size">
-    <option value="" disabled>Select a font size</option>
-  </select>
+  <h2><label for="font-size">Text Size</label></h2>
+  <input id="font-size" type="range" max="1000" min="300" step="50">
 
-  <h2><label for="font-family">Font</label></h2>
-  <select class="font-family" id="font-family">
-    <option value="" disabled>Select a font</option>
-  </select>
-
-  <div class="checkbox-group text-shadow">
-    <input id="text-shadow" name="shadow" type="checkbox"> 
-    <label for="text-shadow">Text Shadow</label>
-  </div>
+  <h2><label for="top-padding">Top Padding</label></h2>
+  <input id="top-padding" type="range" max="1.5" min="1" step="0.01">
 
   <h2><label for="credit">Logo</label></h2>
   <select class="watermark" id="watermark">

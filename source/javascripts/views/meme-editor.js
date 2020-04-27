@@ -24,6 +24,11 @@ MEME.MemeEditorView = Backbone.View.extend({
       $('#text-shadow').parent().show();
     }
 
+    // Build canvas width options:
+    if (d.widthOpts && d.widthOpts.length) {
+      $('#width').append(buildOptions(d.widthOpts)).show();
+    }
+
     // Build text alignment options:
     if (d.textAlignOpts && d.textAlignOpts.length) {
       $('#text-align').append(buildOptions(d.textAlignOpts)).show();
@@ -37,6 +42,11 @@ MEME.MemeEditorView = Backbone.View.extend({
     // Build font family options:
     if (d.fontFamilyOpts && d.fontFamilyOpts.length) {
       $('#font-family').append(buildOptions(d.fontFamilyOpts)).show();
+    }
+
+    // Build top padding options:
+    if (d.topHeadingOpts && d.topHeadingOpts.length) {
+      $('#top-heading').append(buildOptions(d.topHeadingOpts)).show();
     }
 
     // Build watermark options:
@@ -57,11 +67,13 @@ MEME.MemeEditorView = Backbone.View.extend({
 
   render: function() {
     var d = this.model.toJSON();
+    this.$('#width').val(d.width);
     this.$('#headline').val(d.headlineText);
     this.$('#credit').val(d.creditText);
     this.$('#watermark').val(d.watermarkSrc);
     this.$('#image-scale').val(d.imageScale);
     this.$('#font-size').val(d.fontSize);
+    this.$('#top-padding').val(d.topPadding);
     this.$('#font-family').val(d.fontFamily);
     this.$('#text-align').val(d.textAlign);
     this.$('#text-shadow').prop('checked', d.textShadow);
@@ -69,10 +81,12 @@ MEME.MemeEditorView = Backbone.View.extend({
   },
 
   events: {
+    'input #width': 'onWidth',
     'input #headline': 'onHeadline',
     'input #credit': 'onCredit',
     'input #image-scale': 'onScale',
-    'change #font-size': 'onFontSize',
+    'input #font-size': 'onFontSize',
+    'input #top-padding': 'onTopPadding',
     'change #font-family': 'onFontFamily',
     'change #watermark': 'onWatermark',
     'change #text-align': 'onTextAlign',
@@ -81,6 +95,10 @@ MEME.MemeEditorView = Backbone.View.extend({
     'dragover #dropzone': 'onZoneOver',
     'dragleave #dropzone': 'onZoneOut',
     'drop #dropzone': 'onZoneDrop'
+  },
+
+  onWidth: function() {
+    this.model.set('width', this.$('#width').val());
   },
 
   onCredit: function() {
@@ -101,6 +119,10 @@ MEME.MemeEditorView = Backbone.View.extend({
 
   onFontSize: function() {
     this.model.set('fontSize', this.$('#font-size').val());
+  },
+
+  onTopPadding: function() {
+    this.model.set('topPadding', this.$('#top-padding').val());
   },
 
   onFontFamily: function() {

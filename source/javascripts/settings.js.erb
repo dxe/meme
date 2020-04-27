@@ -10,6 +10,19 @@ var MEME_SETTINGS = {
   // Font family options: set to empty array to disable font selector.
   // These options may also be formatted as {text:'Knockout', value:'"Knockout 28 B"'}.
   fontFamilyOpts: ['Komu'],
+
+  // Canvas size
+  width: 3300, // Canvas rending width.
+  height: 2550, // Canvas rendering height.
+  // Font size options: set to empty array to disable font-size selector.
+  widthOpts: [
+    {text: 'Letter (216x279mm, 8.5x11")', value: 3300},
+    {text: 'Legal (216x356mm, 8.5x14")', value: 4200},
+    {text: 'Square', value: 2550}
+  ],
+
+  // Default padding above headline
+  topPadding: 1.25,
   
   // Font size of main headline:
   fontSize: 500,
@@ -20,8 +33,7 @@ var MEME_SETTINGS = {
     {text: 'Large text', value: 500}
   ],
 
-  headlineText: 'Animal Bill of Rights', // Default headline text.
-  height: 2550, // Canvas rendering height.
+  headlineText: 'Animal Bill\nof Rights', // Default headline text.
   imageScale: 1, // Background image scale.
   imageSrc: '', // Default background image path. MUST reside on host domain, or use base64 data.
   overlayAlpha: 1, // Opacity of image overlay.
@@ -29,7 +41,7 @@ var MEME_SETTINGS = {
   // Image overlay color, or blank ('') for no overlay:
   overlayColor: '#d22027',
   // Overlay color options: set to empty array to disable overlay options selector.
-  overlayColorOpts: ['#d22027', '#29a24b'],
+  overlayColorOpts: ['#d22027', '#000000', '#29a24b'],
   paddingRatio: 0.05, // Percentage of canvas width to use as edge padding.
   
   // Text alignment: valid settings are "left", "center", and "right".
@@ -57,5 +69,4 @@ var MEME_SETTINGS = {
     {text: 'Spanish', value: '<%= image_path("spanish.png") %>', data: ''}
   ],
 
-  width: 3300 // Canvas rendering width.
 };
