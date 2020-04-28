@@ -41,7 +41,6 @@ MEME.MemeCanvasView = Backbone.View.extend({
 
     // Reset canvas display:
     this.canvas.width = d.width;
-    console.log(this.canvas.width);
     this.canvas.height = d.height;
     ctx.clearRect(0, 0, d.width, d.height);
 
@@ -156,7 +155,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
     var data = this.canvas.toDataURL(); //.replace('image/png', 'image/octet-stream');
     this.$('#meme-download').attr({
       'href': data,
-      'download': (d.downloadName || 'share') + '.png'
+      'download': (d.downloadName || 'placard') + '.png'
     });
 
     // Enable drag cursor while canvas has artwork:
