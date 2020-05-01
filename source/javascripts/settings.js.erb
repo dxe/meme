@@ -59,15 +59,18 @@ var MEME_SETTINGS = {
 
   // Path to the watermark image source, or blank for no watermark:
   // Alternatively, use 'FIXME' to populate the watermark with base64 data, avoiding Cross-Origin issues.
-  watermarkSrc: '<%= image_path("notext.png") %>',
+  watermarkSrc: '<%= image_path("no_text.png") %>',
   
   // Watermark image options: set to empty array to disable watermark picker.
   // NOTE: only populate the "data" attributes with base64 data when concerned about Cross-Origin requests...
   // Otherwise, just leave "data" attributes blank and allow images to load from your server.
   watermarkOpts: [
-    {text: 'No Text', value: '<%= image_path("notext.png") %>', data: ''},
+    {text: 'No Text', value: '<%= image_path("no_text.png") %>', data: ''},
     {text: 'English', value: '<%= image_path("english.png") %>', data: ''},
-    {text: 'Spanish', value: '<%= image_path("spanish.png") %>', data: ''}
+    {text: 'English (Minimal)', value: '<%= image_path("english_minimal.png") %>', data: ''},
+    {text: 'Spanish', value: '<%= image_path("spanish.png") %>', data: ''},
+    {text: 'French (Minimal)', value: '<%= image_path("french_minimal.png") %>', data: ''},
+    {text: 'German', value: '<%= image_path("german.png") %>', data: ''}
   ],
 
 };
