@@ -2,14 +2,14 @@ var MEME_SETTINGS = {
   creditText: '', // Default "credits" text.
   creditSize: 12, // Font size for credit text.
   downloadName: 'placard', // The name of the downloaded image file (will have a ".png" extension added).
-  fontColor: 'white', // Universal font color.
+  fontColor: '#313133', // Universal font color.
 
   // Universal font family for texts:
   // Note that you'll need to included quoted font names as you would in CSS, ie: '"Knockout 28 B"'.
-  fontFamily: 'Komu',
+  fontFamily: 'Montserrat',
   // Font family options: set to empty array to disable font selector.
   // These options may also be formatted as {text:'Knockout', value:'"Knockout 28 B"'}.
-  fontFamilyOpts: ['Komu'],
+  fontFamilyOpts: ['Montserrat'],
 
   // Canvas size
   width: 3300, // Canvas rending width.
@@ -23,10 +23,10 @@ var MEME_SETTINGS = {
   ],
 
   // Default padding above headline
-  topPadding: 1.25,
+  topPadding: 1.45,
   
   // Font size of main headline:
-  fontSize: 500,
+  fontSize: 250,
   // Font size options: set to empty array to disable font-size selector.
   fontSizeOpts: [
     {text: 'Small text', value: 200},
@@ -34,15 +34,15 @@ var MEME_SETTINGS = {
     {text: 'Large text', value: 500}
   ],
 
-  headlineText: 'Animal Bill\nof Rights', // Default headline text.
+  headlineText: "It's Not *Food*\nIt's *Violence*", // Default headline text.
   imageScale: 1, // Background image scale.
   imageSrc: '', // Default background image path. MUST reside on host domain, or use base64 data.
   overlayAlpha: 1, // Opacity of image overlay.
 
   // Image overlay color, or blank ('') for no overlay:
-  overlayColor: '#d22027',
+  overlayColor: '#ffffff',
   // Overlay color options: set to empty array to disable overlay options selector.
-  overlayColorOpts: ['#d22027', '#000000', '#29a24b'],
+  overlayColorOpts: ['#ffffff'],
   paddingRatio: 0.05, // Percentage of canvas width to use as edge padding.
   
   // Text alignment: valid settings are "left", "center", and "right".
@@ -55,22 +55,17 @@ var MEME_SETTINGS = {
   textShadow: false, // Text shadow toggle.
   textShadowEdit: false, // Toggles text shadow control within the editor.
   watermarkAlpha: 1, // Opacity of watermark image.
-  watermarkMaxWidthRatio: 0.25, // Maximum allowed width of watermark (percentage of total canvas width).
+  watermarkMaxWidthRatio: 0.35, // Maximum allowed width of watermark (percentage of total canvas width).
 
   // Path to the watermark image source, or blank for no watermark:
   // Alternatively, use 'FIXME' to populate the watermark with base64 data, avoiding Cross-Origin issues.
-  watermarkSrc: '<%= image_path("no_text.png") %>',
+  watermarkSrc: '<%= image_path("logo.png") %>',
   
   // Watermark image options: set to empty array to disable watermark picker.
   // NOTE: only populate the "data" attributes with base64 data when concerned about Cross-Origin requests...
   // Otherwise, just leave "data" attributes blank and allow images to load from your server.
   watermarkOpts: [
-    {text: 'No Text', value: '<%= image_path("no_text.png") %>', data: ''},
-    {text: 'English', value: '<%= image_path("english.png") %>', data: ''},
-    {text: 'English (Minimal)', value: '<%= image_path("english_minimal.png") %>', data: ''},
-    {text: 'Spanish', value: '<%= image_path("spanish.png") %>', data: ''},
-    {text: 'French (Minimal)', value: '<%= image_path("french_minimal.png") %>', data: ''},
-    {text: 'German', value: '<%= image_path("german.png") %>', data: ''}
+    {text: 'Logo', value: '<%= image_path("logo.png") %>', data: ''}
   ],
 
 };

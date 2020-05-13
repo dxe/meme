@@ -26,6 +26,7 @@ configure :build do
   puts "local build"
   set :url_prefix, ""
   set :absolute_prefix, ""
+  set :http_prefix, "/placard-generator"
   activate :asset_hash
   activate :minify_javascript
   activate :minify_css

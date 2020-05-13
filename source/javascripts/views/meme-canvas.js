@@ -81,35 +81,50 @@ MEME.MemeCanvasView = Backbone.View.extend({
       ctx.fillStyle = d.fontColor;
       ctx.textBaseline = 'top';
 
-      // Text shadow:
-      if (d.textShadow) {
-        ctx.shadowColor = "#666";
-        ctx.shadowOffsetX = -2;
-        ctx.shadowOffsetY = 1;
-        ctx.shadowBlur = 10;
-      }
-
       // Text alignment:
       if (d.textAlign == 'center') {
-        ctx.textAlign = 'center';
+        ctx.textAlign = 'left';
         x = d.width / 2;
         y = d.height - d.height / d.topPadding;
         maxWidth = d.width / 1.2;
-
-      } else if (d.textAlign == 'right' ) {
-        ctx.textAlign = 'right';
-        x = d.width - padding;
-
-      } else {
-        ctx.textAlign = 'left';
       }
 
       // just split text by lines to give the user more control
       var lines = d.headlineText.split('\n');
 
       for (var n = 0; n < lines.length; n++) {
-        ctx.fillText(lines[n], x, y);
-        y += Math.round(d.fontSize * 1.2);
+
+        // measure length of entire line (with "*" removed) so that it's centered
+        var lineWithoutSymbol = lines[n].replace(/\*/g, "");
+        x = (d.width - ctx.measureText(lineWithoutSymbol.toUpperCase()).width) / 2;
+
+        // iterate over each char in lines[n]
+        // if char = "*", change color to red
+        // if char = "*" and color already red, change to grey
+        var foundFlag = false;
+        for (var i = 0; i < lines[n].length; i++) {
+          var currentChar = lines[n].charAt(i)
+          var print = true;
+          if (currentChar === "*" && foundFlag) {
+            // found opening "*"
+            ctx.fillStyle = d.fontColor;
+            print = false;
+          } else if (currentChar === "*") {
+            // found closing "*"
+            ctx.fillStyle = "#d70000";
+            foundFlag = true;
+            print = false;
+          }
+          // print character
+          if (print) {
+            ctx.fillText(lines[n].charAt(i).toUpperCase(), x, y);
+            // increment x offset for next char
+            x += ctx.measureText(lines[n].charAt(i).toUpperCase()).width;
+           }
+        }
+
+        // add to y offset for next line
+        y += Math.round(d.fontSize * 1.65); // line spacing is set here
       }
 
       ctx.shadowColor = 'transparent';
