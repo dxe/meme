@@ -79,15 +79,18 @@ MEME.MemeCanvasView = Backbone.View.extend({
       ctx.font = d.fontSize +'pt '+ d.fontFamily;
       ctx.fillStyle = d.fontColor;
       ctx.textBaseline = 'top';
-
       // Since we are printing one char at a time, they should be left aligned
       ctx.textAlign = 'left';
 
-      // Starting y position
-      y = d.height - d.height / d.topPadding;
+      // make all text uppercase
+      d.headlineText = d.headlineText.toUpperCase();
 
       // split text based on user's input
       var lines = d.headlineText.split('\n');
+
+      // calculate total headline height to set starting y position
+      var totalHeadineHeight = Math.round(d.fontSize * 1.65) * lines.length;
+      y = (d.height - totalHeadineHeight) / 2
 
       var printRed = false;
 
@@ -95,7 +98,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
 
         // measure length of entire line (with "*" removed) so that it's centered
         var lineWithoutSymbol = lines[n].replace(/\*/g, "");
-        x = (d.width - ctx.measureText(lineWithoutSymbol.toUpperCase()).width) / 2;
+        x = (d.width - ctx.measureText(lineWithoutSymbol).width) / 2;
 
         // iterate over each char in current line
         // if char = "*", change color to red
@@ -104,9 +107,9 @@ MEME.MemeCanvasView = Backbone.View.extend({
           var currentChar = lines[n].charAt(i)
           if (currentChar != "*") {
             // print char
-            ctx.fillText(lines[n].charAt(i).toUpperCase(), x, y);
+            ctx.fillText(lines[n].charAt(i), x, y);
             // increment x offset for next char
-            x += ctx.measureText(lines[n].charAt(i).toUpperCase()).width;
+            x += ctx.measureText(lines[n].charAt(i)).width;
           } else if (currentChar === "*" && printRed) {
             // found closing "*"
             ctx.fillStyle = d.fontColor;

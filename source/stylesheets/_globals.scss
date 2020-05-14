@@ -6,7 +6,7 @@
 
 
 body {
-  background-color: #fff;
+  background-color: #f2f2f2;
   color: $default-text-color;
   display: table;
   font-family: 'Helvetica';
@@ -43,6 +43,6 @@ body.noselect {
     *zoom: 1;
 }
 
-#meme-canvas {
+#meme-canvas.canvas {
   border-style: solid;
 }
