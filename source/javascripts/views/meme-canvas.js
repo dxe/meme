@@ -75,6 +75,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
     function renderHeadline(ctx) {
       var x = padding;
       var y = padding;
+      var red = "#d70000";
 
       ctx.font = d.fontSize +'pt '+ d.fontFamily;
       ctx.fillStyle = d.fontColor;
@@ -92,10 +93,8 @@ MEME.MemeCanvasView = Backbone.View.extend({
       var totalHeadineHeight = Math.round(d.fontSize * 1.65) * lines.length;
       y = (d.height - totalHeadineHeight) / 2
 
-      var printRed = false;
-
       for (var n = 0; n < lines.length; n++) {
-
+        
         // measure length of entire line (with "*" removed) so that it's centered
         var lineWithoutSymbol = lines[n].replace(/\*/g, "");
         x = (d.width - ctx.measureText(lineWithoutSymbol).width) / 2;
@@ -110,14 +109,12 @@ MEME.MemeCanvasView = Backbone.View.extend({
             ctx.fillText(lines[n].charAt(i), x, y);
             // increment x offset for next char
             x += ctx.measureText(lines[n].charAt(i)).width;
-          } else if (currentChar === "*" && printRed) {
-            // found closing "*"
+          } else if (currentChar === "*" && ctx.fillStyle === red) {
+            // found closing "*", change color back to default
             ctx.fillStyle = d.fontColor;
-            printRed = false;
-          } else if (currentChar === "*") {
-            // found opening "*"
-            ctx.fillStyle = "#d70000";
-            printRed = true;
+          } else {
+            // found opening "*", change color to red
+            ctx.fillStyle = red;
           }
         }
 
