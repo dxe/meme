@@ -73,7 +73,6 @@ MEME.MemeCanvasView = Backbone.View.extend({
     }
 
     function renderHeadline(ctx) {
-      var maxWidth = Math.round(d.width * 0.75);
       var x = padding;
       var y = padding;
 
@@ -81,16 +80,16 @@ MEME.MemeCanvasView = Backbone.View.extend({
       ctx.fillStyle = d.fontColor;
       ctx.textBaseline = 'top';
 
-      // Text alignment:
-      if (d.textAlign == 'center') {
-        ctx.textAlign = 'left';
-        x = d.width / 2;
-        y = d.height - d.height / d.topPadding;
-        maxWidth = d.width / 1.2;
-      }
+      // Since we are printing one char at a time, they should be left aligned
+      ctx.textAlign = 'left';
 
-      // just split text by lines to give the user more control
+      // Starting y position
+      y = d.height - d.height / d.topPadding;
+
+      // split text based on user's input
       var lines = d.headlineText.split('\n');
+
+      var printRed = false;
 
       for (var n = 0; n < lines.length; n++) {
 
@@ -98,29 +97,25 @@ MEME.MemeCanvasView = Backbone.View.extend({
         var lineWithoutSymbol = lines[n].replace(/\*/g, "");
         x = (d.width - ctx.measureText(lineWithoutSymbol.toUpperCase()).width) / 2;
 
-        // iterate over each char in lines[n]
+        // iterate over each char in current line
         // if char = "*", change color to red
         // if char = "*" and color already red, change to grey
-        var foundFlag = false;
         for (var i = 0; i < lines[n].length; i++) {
           var currentChar = lines[n].charAt(i)
-          var print = true;
-          if (currentChar === "*" && foundFlag) {
-            // found opening "*"
-            ctx.fillStyle = d.fontColor;
-            print = false;
-          } else if (currentChar === "*") {
-            // found closing "*"
-            ctx.fillStyle = "#d70000";
-            foundFlag = true;
-            print = false;
-          }
-          // print character
-          if (print) {
+          if (currentChar != "*") {
+            // print char
             ctx.fillText(lines[n].charAt(i).toUpperCase(), x, y);
             // increment x offset for next char
             x += ctx.measureText(lines[n].charAt(i).toUpperCase()).width;
-           }
+          } else if (currentChar === "*" && printRed) {
+            // found closing "*"
+            ctx.fillStyle = d.fontColor;
+            printRed = false;
+          } else if (currentChar === "*") {
+            // found opening "*"
+            ctx.fillStyle = "#d70000";
+            printRed = true;
+          }
         }
 
         // add to y offset for next line
